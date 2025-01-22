@@ -1,0 +1,36 @@
+.filterWrapper {
+  flex-grow: 1;
+  background-color: rgb(219, 219, 219);
+  padding: 8px;
+
+  & form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    & input[type="text"] {
+      flex-grow: 1;
+      background-color: rgb(255, 255, 255);
+      margin-right: 8px;
+      padding: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    & button[type="submit"] {
+      all: unset;
+      padding: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: rgb(228, 228, 228);
+      text-align: center;
+      font-weight: 500;
+      border: inset 1px rgb(200, 200, 200);
+
+      &:hover {
+        background-color: greenyellow;
+      }
+    }
+  }
+}

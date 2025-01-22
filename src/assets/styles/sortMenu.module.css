@@ -1,0 +1,17 @@
+.sortWrapper {
+  background-color: rgb(219, 219, 219);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px;
+
+  & label {
+    cursor: pointer;
+    margin-right: 8px;
+    padding: 8px;
+  }
+
+  & select {
+    cursor: pointer;
+  }
+}
