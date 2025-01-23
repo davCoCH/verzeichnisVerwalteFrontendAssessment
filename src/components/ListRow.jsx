@@ -19,7 +19,7 @@ const ListRow = ({ user, handleDelete, handleEdit }) => {
         </div>
       </div>
       <div className={styles.listRowControls}>
-        <button name="edit" onClick={handleEdit}>
+        <button name="edit" onClick={() => handleEdit(user.id)}>
           edit
         </button>
         <button name="delete" onClick={() => handleDelete(user.id)}>

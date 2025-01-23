@@ -16,15 +16,21 @@
       padding: 8px;
       border-radius: 4px;
       cursor: pointer;
-      background-color: rgb(228, 228, 228);
+      background-color: var(--btn-bg-color);
       text-align: center;
       font-weight: 500;
-      border: inset 1px rgb(200, 200, 200);
+      border: solid 1px var(--btn-bg-color);
 
       &:hover {
         background-color: greenyellow;
 
       }
+    }
+
+    & button:disabled {
+      background-color: #ccc;
+      color: #666;
+      border: solid 1px #ccc;
     }
   }
 
@@ -51,10 +57,10 @@
       padding: 8px;
       border-radius: 4px;
       cursor: pointer;
-      background-color: rgb(228, 228, 228);
+      background-color: var(--btn-bg-color);
       text-align: center;
       font-weight: 500;
-      border: inset 1px rgb(200, 200, 200);
+      border: inset 1px var(--btn-bg-color);
 
       &:hover {
         background-color: greenyellow;

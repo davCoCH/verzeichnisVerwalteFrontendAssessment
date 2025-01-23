@@ -35,10 +35,31 @@
       .userList {
         background-color: rgb(199, 199, 199);
         flex-grow: 1;
-        overflow-y: scroll;
+
 
         .userListControls {
           display: flex;
+        }
+
+        .listWrapper {
+          box-sizing: border-box;
+          position: relative;
+          overflow: hidden;
+          overflow-y: scroll;
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          height: 100%;
+          color: gray;
+          padding: 8px;
+          gap: 8px;
+
+          & h1 {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
         }
       }
     }

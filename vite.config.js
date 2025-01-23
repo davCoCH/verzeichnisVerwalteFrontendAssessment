@@ -10,6 +10,7 @@ export default defineConfig({
       '@components': path.resolve(__dirname, 'src/components'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@styles': path.resolve(__dirname, 'src/assets/styles'),
+      '@helpers': path.resolve(__dirname, 'src/helpers'),
     }
   },
   server: {

@@ -1,51 +1,79 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import SortMenu from "@components/SortMenu";
 import Filter from "@components/Filter";
 import EditPanel from "@components/EditPanel";
 import styles from "@styles/app.module.css";
 import ListRow from "./components/ListRow";
+import {
+  handleBtnState,
+  updateEditPanelUI,
+  updateAddPanelUI,
+} from "@helpers/funcs.js";
+
 function App() {
-  //http://localhost:3000/
+  //http://localhost:3000/ for api mock...
 
-  const [editPanelLabel, seteditPanelLabel] = useState("Neue user erstellen");
+  const [editPanelLabel, seteditPanelLabel] = useState("Neue User erstellen");
+  const [buttonPanelLabel, setButtonPanelLabel] = useState("Erstellen");
 
-  const [users, setUsers] = useState([
-    {
-      id: 0,
-      name: "David",
-      email: "juan@hot.com",
-      telephon: "1234",
-    },
-    {
-      id: 1,
-      name: "Carlos",
-      email: "carlos@hot.com",
-      telephon: "56789",
-    },
-  ]);
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    telephon: "",
+  });
+
+  const [users, setUsers] = useState([]);
+
+  // useEffect(() => {
+  //   handleBtnState("Edit user");
+  // }, []);
+
+  const handleAddUser = () => {
+    updateAddPanelUI({
+      editPanelLabel,
+      seteditPanelLabel,
+      buttonPanelLabel,
+      setButtonPanelLabel,
+      handleBtnState,
+    });
+  };
+
+  const handleEdit = (userID) => {
+    updateEditPanelUI({
+      seteditPanelLabel,
+      setButtonPanelLabel,
+      handleBtnState,
+      buttonPanelLabel,
+      editPanelLabel,
+    });
+
+    const userToEdit = users.filter((user) => user.id === userID)[0];
+
+    setFormValues({
+      name: userToEdit.name,
+      email: userToEdit.email,
+      telephon: userToEdit.telephon,
+    });
+  };
+
+  const handleDelete = (userID) => {
+    console.log("deleting....", userID);
+    setUsers(users.filter((user) => user.id !== userID));
+    setFormValues({
+      name: "",
+      email: "",
+      telephon: "",
+    });
+  };
+
+  const handleFilter = (e) => {
+    e.preventDefault();
+    console.log("fitering");
+  };
 
   const handleSort = (e) => {
     console.log("the seleciton is:", e.target.value);
-  };
-
-  const handleEdit = () => {
-    console.log("editing....");
-    const label = "Edit user";
-    if (editPanelLabel !== label) {
-      seteditPanelLabel(label);
-    }
-  };
-  const handleDelete = (userID) => {
-    console.log("deleting....", userID);
-  };
-
-  const handleAddUser = () => {
-    console.log("add user...");
-    const label = "Add new user";
-    if (editPanelLabel !== label) {
-      seteditPanelLabel(label);
-    }
   };
 
   return (
@@ -55,15 +83,20 @@ function App() {
           <span>Verzeichnis Verwalter</span>
         </header>
         <div className={styles.wrapper}>
-          <aside>
-            <EditPanel label={editPanelLabel} handleAddUser={handleAddUser} />
-          </aside>
+          <EditPanel
+            label={editPanelLabel}
+            buttonLabel={buttonPanelLabel}
+            handleAddUser={handleAddUser}
+            formData={{ formValues, setFormValues }}
+            users={users}
+            setUsers={setUsers}
+          />
           <div className={styles.userList}>
             <div className={styles.userListControls}>
-              <Filter />
+              <Filter handleFilter={handleFilter} />
               <SortMenu handleSort={handleSort} />
             </div>
-            <div>
+            <div className={styles.listWrapper}>
               {users && users.length > 0 ? (
                 users.map((user) => (
                   <ListRow
