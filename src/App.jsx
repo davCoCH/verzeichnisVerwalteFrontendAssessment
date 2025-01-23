@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import SortMenu from "@components/SortMenu";
 import Filter from "@components/Filter";
@@ -10,14 +10,21 @@ import {
   updateEditPanelUI,
   updateAddPanelUI,
 } from "@helpers/funcs.js";
+import useBtnDisabled from "@hooks/useBtnDisabled";
 
 function App() {
   //http://localhost:3000/ for api mock...
 
   const [editPanelLabel, seteditPanelLabel] = useState("Neue User erstellen");
   const [buttonPanelLabel, setButtonPanelLabel] = useState("Erstellen");
-
   const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    telephon: "",
+  });
+
+  const [userBridge, setUserBridge] = useState({
+    id: 0,
     name: "",
     email: "",
     telephon: "",
@@ -25,9 +32,38 @@ function App() {
 
   const [users, setUsers] = useState([]);
 
-  // useEffect(() => {
-  //   handleBtnState("Edit user");
-  // }, []);
+  useBtnDisabled(editPanelLabel);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (buttonPanelLabel !== "Erstellen") {
+      setUsers(
+        users.map((user) => {
+          if (user.id === userBridge.id) {
+            const updateUser = { id: userBridge.id, ...formValues };
+            return updateUser;
+          } else {
+            return user;
+          }
+        })
+      );
+      console.log(`User with id: ${userBridge.id} updated`);
+    } else {
+      const newUser = {
+        id: users.length + 1,
+        ...formValues,
+      };
+      console.log("New user added", newUser);
+      setUsers([newUser, ...users]);
+    }
+
+    setFormValues({
+      name: "",
+      email: "",
+      telephon: "",
+    });
+  };
 
   const handleAddUser = () => {
     updateAddPanelUI({
@@ -37,6 +73,8 @@ function App() {
       setButtonPanelLabel,
       handleBtnState,
     });
+    console.log("add user presed");
+    setFormValues({ name: "", email: "", telephon: "" });
   };
 
   const handleEdit = (userID) => {
@@ -49,6 +87,9 @@ function App() {
     });
 
     const userToEdit = users.filter((user) => user.id === userID)[0];
+
+    setUserBridge(userToEdit);
+    console.log("the user to edit:", userToEdit);
 
     setFormValues({
       name: userToEdit.name,
@@ -87,9 +128,8 @@ function App() {
             label={editPanelLabel}
             buttonLabel={buttonPanelLabel}
             handleAddUser={handleAddUser}
+            handleSubmit={handleSubmit}
             formData={{ formValues, setFormValues }}
-            users={users}
-            setUsers={setUsers}
           />
           <div className={styles.userList}>
             <div className={styles.userListControls}>

@@ -5,38 +5,9 @@ const EditPanel = ({
   label,
   buttonLabel,
   handleAddUser,
+  handleSubmit,
   formData,
-  users,
-  setUsers,
 }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (buttonLabel !== "Erstellen") {
-      setUsers(
-        users.map((user) => {
-          if (user.id === 1) {
-            return { ...formData.formValues };
-          } else {
-            return user;
-          }
-        })
-      );
-    } else {
-      setUsers([{ ...formData.formValues, id: users.length + 1 }, ...users]);
-    }
-
-    formData.setFormValues({
-      name: "",
-      email: "",
-      telephon: "",
-    });
-    console.log("Form submited", formData.formValues);
-
-    const form = document.getElementsByTagName("input");
-    Array.from(form).forEach((input) => (input.value = ""));
-  };
-
   const handleFormChanges = (e) => {
     const { name, value } = e.target;
 
@@ -51,7 +22,7 @@ const EditPanel = ({
       <div className={styles.editPanelWrapper}>
         <header className={styles.editPanelHeader}>
           <span>{label}</span>
-          <button id="addBtn" onClick={handleAddUser} disabled>
+          <button id="addBtn" onClick={handleAddUser}>
             +
           </button>
         </header>

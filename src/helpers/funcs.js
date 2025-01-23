@@ -34,7 +34,8 @@ export const updateAddPanelUI = ({ editPanelLabel, seteditPanelLabel, buttonPane
 
   console.log("add user...");
 
-  const titleLabel = "Add new user";
+  const titleLabel = "Neue User erstellen";
+
   if (editPanelLabel !== titleLabel) {
     seteditPanelLabel(titleLabel);
   }
