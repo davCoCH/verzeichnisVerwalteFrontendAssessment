@@ -6,8 +6,8 @@ const ConfirmationDialog = ({ user, deleteUser }) => {
     <div className={styles.confirmationDialog}>
       <h2>Achtung!!</h2>
       <p>
-        Der User <strong>{user.name}</strong> mit id: <strong>{user.id}</strong>{" "}
-        wir gelöscht
+        Der Benutzer <strong>{user.name}</strong> mit der ID:{" "}
+        <strong>{user.id}</strong> wird gelöscht.
       </p>
       <p>Sind sie sicher?</p>
 

@@ -17,6 +17,10 @@
     margin-bottom: 16px;
   }
 
+  & p:nth-child(2) {
+    margin-bottom: 8px;
+  }
+
   & button {
     all: unset;
     margin-top: 16px;
