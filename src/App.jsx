@@ -10,32 +10,29 @@ import {
   updateEditPanelUI,
   updateAddPanelUI,
 } from "@helpers/funcs.js";
+import { mockUsers, formModel, userModel } from "@helpers/models";
 import useBtnDisabled from "@hooks/useBtnDisabled";
+import ConfirmationDialog from "./components/ConfirmationDialog";
 
 function App() {
   //http://localhost:3000/ for api mock...
 
   const [editPanelLabel, seteditPanelLabel] = useState("Neue User erstellen");
   const [buttonPanelLabel, setButtonPanelLabel] = useState("Erstellen");
-  const [formValues, setFormValues] = useState({
-    name: "",
-    email: "",
-    telephon: "",
-  });
-
-  const [userBridge, setUserBridge] = useState({
-    id: 0,
-    name: "",
-    email: "",
-    telephon: "",
-  });
-
-  const [users, setUsers] = useState([]);
+  const [formValues, setFormValues] = useState(formModel);
+  const [userBridge, setUserBridge] = useState(userModel);
+  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
+  const [users, setUsers] = useState(mockUsers);
+  const [filteredList, setFilteredList] = useState([]);
+  const [filter, setFilter] = useState("");
 
   useBtnDisabled(editPanelLabel);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setFilter("");
+    setFilteredList([]);
 
     if (buttonPanelLabel !== "Erstellen") {
       setUsers(
@@ -58,11 +55,7 @@ function App() {
       setUsers([newUser, ...users]);
     }
 
-    setFormValues({
-      name: "",
-      email: "",
-      telephon: "",
-    });
+    setFormValues(formModel);
   };
 
   const handleAddUser = () => {
@@ -74,7 +67,7 @@ function App() {
       handleBtnState,
     });
     console.log("add user presed");
-    setFormValues({ name: "", email: "", telephon: "" });
+    setFormValues(formModel);
   };
 
   const handleEdit = (userID) => {
@@ -99,22 +92,77 @@ function App() {
   };
 
   const handleDelete = (userID) => {
-    console.log("deleting....", userID);
+    setShowConfirmationDialog(true);
+    setUserBridge(users.filter((user) => user.id === userID)[0]);
+  };
+
+  const confirmDeleteUser = (userID) => {
+    console.log("borrando...");
     setUsers(users.filter((user) => user.id !== userID));
-    setFormValues({
-      name: "",
-      email: "",
-      telephon: "",
-    });
+    setFormValues(formModel);
+    console.log(`The user: ${userBridge.name} has been deleted!`);
+    setUserBridge(userModel);
+    setShowConfirmationDialog(false);
   };
 
   const handleFilter = (e) => {
-    e.preventDefault();
-    console.log("fitering");
+    const searchUser = e.target.value;
+    setFilter(searchUser);
+
+    if (searchUser === "") {
+      setFilteredList([]);
+      return;
+    } else {
+      const filteredUsers = users.filter((user) =>
+        user.name.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setFilteredList(filteredUsers);
+    }
   };
 
   const handleSort = (e) => {
-    console.log("the seleciton is:", e.target.value);
+    const sortedUser = [...users];
+    if (e.target.value === "A-Z") {
+      sortedUser.sort((a, b) => a.name.localeCompare(b.name));
+    } else {
+      sortedUser.sort((a, b) => b.name.localeCompare(a.name));
+    }
+    setUsers(sortedUser);
+  };
+
+  const renderUserList = () => {
+    if (filteredList.length > 0) {
+      return filteredList.map((user) => (
+        <ListRow
+          key={user.id}
+          user={user}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
+      ));
+    }
+
+    if (users && users.length > 0) {
+      return users.map((user) => (
+        <ListRow
+          key={user.id}
+          user={user}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
+      ));
+    }
+
+    return <h1>Add some users</h1>;
+  };
+
+  const renderListControls = () => {
+    return (
+      <div className={styles.userListControls}>
+        <Filter handleFilter={handleFilter} filter={filter} />
+        <SortMenu handleSort={handleSort} />
+      </div>
+    );
   };
 
   return (
@@ -132,22 +180,15 @@ function App() {
             formData={{ formValues, setFormValues }}
           />
           <div className={styles.userList}>
-            <div className={styles.userListControls}>
-              <Filter handleFilter={handleFilter} />
-              <SortMenu handleSort={handleSort} />
-            </div>
+            {renderListControls()}
             <div className={styles.listWrapper}>
-              {users && users.length > 0 ? (
-                users.map((user) => (
-                  <ListRow
-                    key={user.id}
-                    user={user}
-                    handleEdit={handleEdit}
-                    handleDelete={handleDelete}
-                  />
-                ))
+              {showConfirmationDialog ? (
+                <ConfirmationDialog
+                  user={userBridge}
+                  deleteUser={confirmDeleteUser}
+                />
               ) : (
-                <h1>Add some users</h1>
+                renderUserList()
               )}
             </div>
           </div>

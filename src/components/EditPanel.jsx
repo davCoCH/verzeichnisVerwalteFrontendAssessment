@@ -23,7 +23,7 @@ const EditPanel = ({
         <header className={styles.editPanelHeader}>
           <span>{label}</span>
           <button id="addBtn" onClick={handleAddUser}>
-            +
+            Neue user
           </button>
         </header>
 

@@ -1,0 +1,38 @@
+.confirmationDialog {
+  position: absolute;
+
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: rgb(230, 230, 230);
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  padding: 16px;
+  border-radius: 8px;
+  border: solid 1px rgb(171, 171, 171);
+
+  & h2 {
+    margin-bottom: 16px;
+  }
+
+  & button {
+    all: unset;
+    margin-top: 16px;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--btn-delete-bg-color);
+    text-align: center;
+    font-weight: 500;
+    border: solid 1px var(--btn-delete-bg-color);
+    color: black;
+
+    &:hover {
+      background-color: var(--btn-delete-hover-color);
+
+    }
+
+  }
+}

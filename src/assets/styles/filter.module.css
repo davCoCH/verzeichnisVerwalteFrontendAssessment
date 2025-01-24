@@ -2,35 +2,31 @@
   flex-grow: 1;
   background-color: rgb(219, 219, 219);
   padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  & form {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+  & input[type="text"] {
+    flex-grow: 1;
+    background-color: rgb(255, 255, 255);
+    margin-right: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 
-    & input[type="text"] {
-      flex-grow: 1;
-      background-color: rgb(255, 255, 255);
-      margin-right: 8px;
-      padding: 8px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+  & button[type="button"] {
+    all: unset;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--btn-bg-color);
+    text-align: center;
+    font-weight: 500;
+    border: inset 1px var(--btn-bg-color);
 
-    & button[type="submit"] {
-      all: unset;
-      padding: 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      background-color: var(--btn-bg-color);
-      text-align: center;
-      font-weight: 500;
-      border: inset 1px var(--btn-bg-color);
-
-      &:hover {
-        background-color: greenyellow;
-      }
+    &:hover {
+      background-color: greenyellow;
     }
   }
 }
