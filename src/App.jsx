@@ -97,12 +97,13 @@ function App() {
   };
 
   const confirmDeleteUser = (userID) => {
-    console.log("borrando...");
     setUsers(users.filter((user) => user.id !== userID));
+    setFilteredList(filteredList.filter((user) => user.id !== userID));
+    setFilter("");
     setFormValues(formModel);
-    console.log(`The user: ${userBridge.name} has been deleted!`);
     setUserBridge(userModel);
     setShowConfirmationDialog(false);
+    console.log(`The user: ${userBridge.name} has been deleted!`);
   };
 
   const handleFilter = (e) => {
@@ -113,8 +114,10 @@ function App() {
       setFilteredList([]);
       return;
     } else {
-      const filteredUsers = users.filter((user) =>
-        user.name.toLowerCase().includes(e.target.value.toLowerCase())
+      const filteredUsers = users.filter(
+        (user) =>
+          user.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
+          user.email.toLowerCase().includes(e.target.value.toLowerCase())
       );
       setFilteredList(filteredUsers);
     }
