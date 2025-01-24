@@ -96,41 +96,25 @@ Entwickeln Sie eine Webanwendung zur Verwaltung eines Benutzerverzeichnisses mit
 1. **Funktionalität:**
 
    - Alle CRUD-Funktionen sind vollständig implementiert und funktionieren einwandfrei.
+   - Die Anwendung erfüllt die Anforderungen.
+   - Filter und Interaktionen funktionieren einwandfrei.
 
 2. **Codequalität:**
 
    - Der Code ist sauber und gut organisiert.
    - Best Practices für React und JavaScript werden eingehalten.
    - Angemessene Verwendung von Zustand und Props.
+   - Angemessene Verwendung von React und Hooks.
+   - Korrekte Trennung der Verantwortlichkeiten zwischen den Komponenten.
 
 3. **Design und Benutzerfreundlichkeit:**
 
    - Die Anwendung ist optisch ansprechend und benutzerfreundlich.
    - Das Design passt sich gut an verschiedene Bildschirmgrößen an.
+   - Die Benutzeroberfläche ist intuitiv und optisch ansprechend.
 
 4. **Extras:**
    - Implementierung zusätzlicher Funktionen wie Suche, Sortierung oder API-Simulation.
-
----
-
-### **Bewertungskriterien:**
-
-1. **Funktionalität:**
-
-   - Die Anwendung erfüllt die Anforderungen.
-   - Filter und Interaktionen funktionieren einwandfrei.
-
-2. **Codequalität:**
-
-   - Der Code ist sauber, gut organisiert und folgt bewährten Praktiken.
-   - Angemessene Verwendung von React und Hooks.
-   - Korrekte Trennung der Verantwortlichkeiten zwischen den Komponenten.
-
-3. **Design und Stil:**
-   - Die Benutzeroberfläche ist intuitiv und optisch ansprechend.
-   - Das Design passt sich gut an verschiedene Bildschirmgrößen an.
-
----
 
 ### **Lieferumfang:**
 
