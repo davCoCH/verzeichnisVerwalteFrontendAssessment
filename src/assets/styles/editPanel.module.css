@@ -81,5 +81,6 @@
     padding: 16px;
     font-size: small;
     color: rgb(255, 131, 131);
+    min-height: 48px;
   }
 }

@@ -1,5 +1,5 @@
 .appContainer {
-  background-color: pink;
+  background-color: rgb(109, 109, 109);
   min-height: 100vh;
   width: 100vw;
   display: flex;
@@ -36,7 +36,6 @@
         background-color: rgb(199, 199, 199);
         flex-grow: 1;
 
-
         .userListControls {
           display: flex;
         }
@@ -66,4 +65,29 @@
     }
 
   }
+}
+
+@media (min-width: 320px) and (max-width: 760px) {
+  .appContainer {
+    .app {
+      margin: 16px;
+      height: fit-content;
+
+      .wrapper {
+        flex-direction: column;
+
+        & aside {
+          min-width: none;
+          max-width: none;
+        }
+
+        .userList {
+          .listWrapper {
+            max-height: 400px;
+          }
+        }
+      }
+    }
+  }
+
 }
