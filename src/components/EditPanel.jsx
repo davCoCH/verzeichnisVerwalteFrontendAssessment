@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@styles/editPanel.module.css";
+import useSubmitDisabled from "../hooks/useSubmitDisabled";
 
 const EditPanel = ({
   label,
@@ -8,17 +9,20 @@ const EditPanel = ({
   handleSubmit,
   formData,
 }) => {
+  const { formValues, setFormValues } = formData;
+  const { name, email, telephon } = formValues;
+  const { btnIsDisabled, errorMessage } = useSubmitDisabled({ formData });
+
   const handleFormChanges = (e) => {
     const { name, value } = e.target;
-
-    formData.setFormValues({
-      ...formData.formValues,
+    setFormValues({
+      ...formValues,
       [name]: value,
     });
   };
 
   return (
-    <aside>
+    <aside className={styles.aside}>
       <div className={styles.editPanelWrapper}>
         <header className={styles.editPanelHeader}>
           <span>{label}</span>
@@ -34,7 +38,7 @@ const EditPanel = ({
             id="name"
             placeholder="Name"
             name="name"
-            value={formData.formValues.name}
+            value={name}
             onChange={handleFormChanges}
           />
           <label htmlFor="email">E-Mail-Adresse</label>
@@ -43,7 +47,7 @@ const EditPanel = ({
             id="email"
             name="email"
             placeholder="Email-Adresse"
-            value={formData.formValues.email}
+            value={email}
             onChange={handleFormChanges}
           />
           <label htmlFor="telephon">Telefonnummer</label>
@@ -52,11 +56,21 @@ const EditPanel = ({
             type="text"
             name="telephon"
             placeholder="00417943546"
-            value={formData.formValues.telephon}
+            value={telephon}
             onChange={handleFormChanges}
           ></input>
-          <button type="submit">{buttonLabel}</button>
+          <button
+            id="createBtn"
+            name="createBtn"
+            type="submit"
+            disabled={!btnIsDisabled}
+          >
+            {buttonLabel}
+          </button>
         </form>
+      </div>
+      <div className={styles.errorLabel}>
+        {errorMessage && <p>{errorMessage}</p>}
       </div>
     </aside>
   );

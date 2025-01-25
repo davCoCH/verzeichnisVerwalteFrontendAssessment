@@ -12,6 +12,7 @@ import {
 } from "@helpers/funcs.js";
 import { mockUsers, formModel, userModel } from "@helpers/models";
 import useBtnDisabled from "@hooks/useBtnDisabled";
+import useSubmitDisabled from "@hooks/useSubmitDisabled";
 import ConfirmationDialog from "./components/ConfirmationDialog";
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
   const [filteredList, setFilteredList] = useState([]);
   const [filter, setFilter] = useState("");
 
-  useBtnDisabled(editPanelLabel);
+  useBtnDisabled(editPanelLabel, "Neue User erstellen", "addBtn");
+  // useSubmitDisabled();
 
   const handleSubmit = (e) => {
     e.preventDefault();

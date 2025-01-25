@@ -1,71 +1,85 @@
-.editPanelWrapper {
-  background-color: rgb(207, 207, 207);
-  margin: 4px;
-  border-radius: 8px;
-  overflow: hidden;
+.aside {
+  .editPanelWrapper {
+    background-color: rgb(207, 207, 207);
+    margin: 4px;
+    border-radius: 8px;
+    overflow: hidden;
 
-  .editPanelHeader {
-    background-color: rgb(190, 190, 190);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px;
-
-    & button {
-      all: unset;
+    .editPanelHeader {
+      background-color: rgb(190, 190, 190);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      background-color: var(--btn-bg-color);
-      text-align: center;
-      font-weight: 500;
-      border: solid 1px var(--btn-bg-color);
 
-      &:hover {
-        background-color: greenyellow;
+      & button {
+        all: unset;
+        padding: 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: var(--btn-bg-color);
+        text-align: center;
+        font-weight: 500;
+        border: solid 1px var(--btn-bg-color);
 
+        &:hover {
+          background-color: greenyellow;
+
+        }
+      }
+
+      & button:disabled {
+        background-color: #ccc;
+        color: #666;
+        border: solid 1px #ccc;
       }
     }
 
-    & button:disabled {
-      background-color: #ccc;
-      color: #666;
-      border: solid 1px #ccc;
+    & form {
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+
+      & label {
+        margin-bottom: 8px;
+        font-size: medium;
+        color: rgb(144, 144, 144);
+      }
+
+      & input {
+        margin-bottom: 8px;
+        padding: 8px;
+        border-radius: 4px;
+        border: none;
+      }
+
+      & button {
+        all: unset;
+        padding: 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: var(--btn-bg-color);
+        text-align: center;
+        font-weight: 500;
+        border: inset 1px var(--btn-bg-color);
+
+        &:hover {
+          background-color: greenyellow;
+
+        }
+      }
+
+      & button:disabled {
+        background-color: #ccc;
+        color: #666;
+        border: solid 1px #b6b6b6;
+      }
     }
   }
 
-  & form {
-    display: flex;
-    flex-direction: column;
-    padding: 8px;
-
-    & label {
-      margin-bottom: 8px;
-      font-size: medium;
-      color: rgb(144, 144, 144);
-    }
-
-    & input {
-      margin-bottom: 8px;
-      padding: 8px;
-      border-radius: 4px;
-      border: none;
-    }
-
-    & button {
-      all: unset;
-      padding: 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      background-color: var(--btn-bg-color);
-      text-align: center;
-      font-weight: 500;
-      border: inset 1px var(--btn-bg-color);
-
-      &:hover {
-        background-color: greenyellow;
-
-      }
-    }
+  .errorLabel {
+    padding: 16px;
+    font-size: small;
+    color: rgb(255, 131, 131);
   }
 }
