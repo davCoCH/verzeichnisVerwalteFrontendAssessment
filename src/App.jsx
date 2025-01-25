@@ -174,7 +174,7 @@ function App() {
         </header>
         <div className={styles.wrapper}>
           <EditPanel
-            label={editPanelLabel}
+            editPanelTitlelabel={editPanelLabel}
             buttonLabel={buttonPanelLabel}
             handleAddUser={handleAddUser}
             handleSubmit={handleSubmit}

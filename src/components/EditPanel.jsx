@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "@styles/editPanel.module.css";
 import useSubmitDisabled from "@hooks/useSubmitDisabled";
 
 const EditPanel = ({
-  label,
+  editPanelTitlelabel,
   buttonLabel,
   handleAddUser,
   handleSubmit,
@@ -25,7 +25,7 @@ const EditPanel = ({
     <aside className={styles.aside}>
       <div className={styles.editPanelWrapper}>
         <header className={styles.editPanelHeader}>
-          <span>{label}</span>
+          <span>{editPanelTitlelabel}</span>
           <button id="addBtn" onClick={handleAddUser}>
             Neue user
           </button>
