@@ -3,12 +3,10 @@ import React from "react";
 import SortMenu from "@components/SortMenu";
 import Filter from "@components/Filter";
 import EditPanel from "@components/EditPanel";
-import styles from "@styles/app.module.css";
 import ListRow from "./components/ListRow";
-import useCRUD from "@hooks/useCRUD";
-// import { mockUsers, formModel, userModel } from "@helpers/models";
-
 import ConfirmationDialog from "./components/ConfirmationDialog";
+import useCRUD from "@hooks/useCRUD";
+import styles from "@styles/app.module.css";
 
 function App() {
   const {
