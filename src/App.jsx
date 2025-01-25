@@ -12,12 +12,9 @@ import {
 } from "@helpers/funcs.js";
 import { mockUsers, formModel, userModel } from "@helpers/models";
 import useBtnDisabled from "@hooks/useBtnDisabled";
-import useSubmitDisabled from "@hooks/useSubmitDisabled";
 import ConfirmationDialog from "./components/ConfirmationDialog";
 
 function App() {
-  //http://localhost:3000/ for api mock...
-
   const [editPanelLabel, seteditPanelLabel] = useState("Neue User erstellen");
   const [buttonPanelLabel, setButtonPanelLabel] = useState("Erstellen");
   const [formValues, setFormValues] = useState(formModel);
@@ -28,37 +25,6 @@ function App() {
   const [filter, setFilter] = useState("");
 
   useBtnDisabled(editPanelLabel, "Neue User erstellen", "addBtn");
-  // useSubmitDisabled();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    setFilter("");
-    setFilteredList([]);
-
-    if (buttonPanelLabel !== "Erstellen") {
-      setUsers(
-        users.map((user) => {
-          if (user.id === userBridge.id) {
-            const updateUser = { id: userBridge.id, ...formValues };
-            return updateUser;
-          } else {
-            return user;
-          }
-        })
-      );
-      console.log(`User with id: ${userBridge.id} updated`);
-    } else {
-      const newUser = {
-        id: users.length + 1,
-        ...formValues,
-      };
-      console.log("New user added", newUser);
-      setUsers([newUser, ...users]);
-    }
-
-    setFormValues(formModel);
-  };
 
   const handleAddUser = () => {
     updateAddPanelUI({
@@ -68,7 +34,6 @@ function App() {
       setButtonPanelLabel,
       handleBtnState,
     });
-    console.log("add user presed");
     setFormValues(formModel);
   };
 
@@ -91,6 +56,37 @@ function App() {
       email: userToEdit.email,
       telephon: userToEdit.telephon,
     });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setFilter("");
+    setFilteredList([]);
+
+    if (buttonPanelLabel !== "Erstellen") {
+      setUsers(
+        users.map((user) => {
+          if (user.id === userBridge.id) {
+            const updateUser = { id: userBridge.id, ...formValues };
+            return updateUser;
+          } else {
+            return user;
+          }
+        })
+      );
+      console.log(`User with id: ${userBridge.id} updated`);
+      handleAddUser();
+    } else {
+      const newUser = {
+        id: users.length + 1,
+        ...formValues,
+      };
+      console.log("New user added", newUser);
+      setUsers([newUser, ...users]);
+    }
+
+    setFormValues(formModel);
   };
 
   const handleDelete = (userID) => {

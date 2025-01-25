@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "@styles/editPanel.module.css";
-import useSubmitDisabled from "../hooks/useSubmitDisabled";
+import useSubmitDisabled from "@hooks/useSubmitDisabled";
 
 const EditPanel = ({
   label,
