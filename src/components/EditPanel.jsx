@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "@styles/editPanel.module.css";
+import useUpdateEditPanelUI from "@hooks/useUpdateEditPanelUI";
 import useSubmitDisabled from "@hooks/useSubmitDisabled";
+import useBtnDisabled from "@hooks/useBtnDisabled";
 
 const EditPanel = ({
-  editPanelTitlelabel,
-  buttonLabel,
+  operationType,
   handleAddUser,
   handleSubmit,
   formData,
@@ -12,6 +13,10 @@ const EditPanel = ({
   const { formValues, setFormValues } = formData;
   const { name, email, telephon } = formValues;
   const { btnIsDisabled, errorMessage } = useSubmitDisabled({ formData });
+  const { titlePanel, buttonPanelLabel } = useUpdateEditPanelUI({
+    operationType,
+  });
+  useBtnDisabled(titlePanel, "Neue User erstellen", "addBtn");
 
   const handleFormChanges = (e) => {
     const { name, value } = e.target;
@@ -25,7 +30,7 @@ const EditPanel = ({
     <aside className={styles.aside}>
       <div className={styles.editPanelWrapper}>
         <header className={styles.editPanelHeader}>
-          <span>{editPanelTitlelabel}</span>
+          <span>{titlePanel}</span>
           <button id="addBtn" onClick={handleAddUser}>
             Neue user
           </button>
@@ -65,7 +70,7 @@ const EditPanel = ({
             type="submit"
             disabled={!btnIsDisabled}
           >
-            {buttonLabel}
+            {buttonPanelLabel}
           </button>
         </form>
       </div>

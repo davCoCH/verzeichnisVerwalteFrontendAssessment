@@ -10,7 +10,7 @@ export const handleBtnState = (label) => {
 };
 
 export const updateEditPanelUI = ({
-  seteditPanelLabel,
+  setTitlePanel,
   setButtonPanelLabel,
   handleBtnState,
   buttonPanelLabel,
@@ -21,7 +21,7 @@ export const updateEditPanelUI = ({
   console.log("editing....");
   const titleLabel = "Edit user";
   if (editPanelLabel !== titleLabel) {
-    seteditPanelLabel(titleLabel);
+    setTitlePanel(titleLabel);
   }
   const buttonLabel = "Speicher";
   if (buttonPanelLabel !== buttonLabel) {
@@ -30,14 +30,14 @@ export const updateEditPanelUI = ({
   handleBtnState(titleLabel);
 };
 
-export const updateAddPanelUI = ({ editPanelLabel, seteditPanelLabel, buttonPanelLabel, setButtonPanelLabel, handleBtnState }) => {
+export const updateAddPanelUI = ({ titlePanel, setTitlePanel, buttonPanelLabel, setButtonPanelLabel, handleBtnState }) => {
 
   console.log("add user...");
 
   const titleLabel = "Neue User erstellen";
 
-  if (editPanelLabel !== titleLabel) {
-    seteditPanelLabel(titleLabel);
+  if (titlePanel !== titleLabel) {
+    setTitlePanel(titleLabel);
   }
 
   const buttonLabel = "Erstellen";

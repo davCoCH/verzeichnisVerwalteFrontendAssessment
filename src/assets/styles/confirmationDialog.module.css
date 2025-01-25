@@ -21,22 +21,36 @@
     margin-bottom: 8px;
   }
 
-  & button {
-    all: unset;
-    margin-top: 16px;
-    padding: 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: var(--btn-delete-bg-color);
-    text-align: center;
-    font-weight: 500;
-    border: solid 1px var(--btn-delete-bg-color);
-    color: black;
+  .btnsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
 
-    &:hover {
-      background-color: var(--btn-delete-hover-color);
+    & button {
+      all: unset;
+      margin-top: 16px;
+      padding: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: var(--btn-delete-bg-color);
+      border: solid 1px var(--btn-delete-bg-color);
+      text-align: center;
+      font-weight: 500;
+      color: black;
 
+      &:hover {
+        background-color: var(--btn-delete-hover-color);
+      }
     }
 
+    & button:nth-child(1) {
+      background-color: gray;
+      border: solid 1px gray;
+
+      &:hover {
+        background-color: rgb(169, 169, 169);
+      }
+    }
   }
 }
