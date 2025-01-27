@@ -11,6 +11,7 @@ import styles from "@styles/app.module.css";
 function App() {
   const {
     users,
+    setUsers,
     userBridge,
     operation,
     handleEdit,
@@ -24,6 +25,7 @@ function App() {
     confirmDeleteUser,
     filter,
     filteredList,
+    setFilteredList,
     handleFilter,
     handleSort,
   } = useCRUD();
@@ -32,7 +34,7 @@ function App() {
     if (filteredList.length > 0) {
       return filteredList.map((user) => (
         <ListRow
-          key={user.id}
+          key={user.userID}
           user={user}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
@@ -43,7 +45,7 @@ function App() {
     if (users && users.length > 0) {
       return users.map((user) => (
         <ListRow
-          key={user.id}
+          key={user.userID}
           user={user}
           handleEdit={handleEdit}
           handleDelete={handleDelete}

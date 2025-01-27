@@ -5,7 +5,7 @@ export default function useCRUD() {
   const [formValues, setFormValues] = useState(formModel);
   const [userBridge, setUserBridge] = useState(userModel);
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
-  const [users, setUsers] = useState(mockUsers);
+  const [users, setUsers] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [filter, setFilter] = useState("");
   const [operation, setOperation] = useState("create");
@@ -114,6 +114,7 @@ export default function useCRUD() {
 
   return {
     users,
+    setUsers,
     userBridge,
     operation,
     handleEdit,
@@ -127,6 +128,7 @@ export default function useCRUD() {
     confirmDeleteUser,
     filter,
     filteredList,
+    setFilteredList,
     handleFilter,
     handleSort
   }
