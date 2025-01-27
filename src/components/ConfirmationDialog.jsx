@@ -13,7 +13,9 @@ const ConfirmationDialog = ({ user, deleteUser, cancelDelete }) => {
 
       <div className={styles.btnsContainer}>
         <button onClick={cancelDelete}>Abbrechen</button>
-        <button onClick={() => deleteUser(user.id)}>Bestätigen</button>
+        <button onClick={async () => await deleteUser(user.id)}>
+          Bestätigen
+        </button>
       </div>
     </div>
   );

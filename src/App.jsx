@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import SortMenu from "@components/SortMenu";
 import Filter from "@components/Filter";
@@ -11,7 +11,6 @@ import styles from "@styles/app.module.css";
 function App() {
   const {
     users,
-    setUsers,
     userBridge,
     operation,
     handleEdit,
@@ -25,16 +24,20 @@ function App() {
     confirmDeleteUser,
     filter,
     filteredList,
-    setFilteredList,
     handleFilter,
     handleSort,
+    fetchAndSetUsers,
   } = useCRUD();
+
+  useEffect(() => {
+    fetchAndSetUsers();
+  }, []);
 
   const renderUserList = () => {
     if (filteredList.length > 0) {
       return filteredList.map((user) => (
         <ListRow
-          key={user.userID}
+          key={user.id}
           user={user}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
@@ -45,7 +48,7 @@ function App() {
     if (users && users.length > 0) {
       return users.map((user) => (
         <ListRow
-          key={user.userID}
+          key={user.id}
           user={user}
           handleEdit={handleEdit}
           handleDelete={handleDelete}

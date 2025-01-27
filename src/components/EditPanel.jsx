@@ -36,7 +36,7 @@ const EditPanel = ({
           </button>
         </header>
 
-        <form id="mainForm" onSubmit={handleSubmit}>
+        <form id="mainForm" onSubmit={async (e) => await handleSubmit(e)}>
           <label htmlFor="name">Name</label>
           <input
             type="text"

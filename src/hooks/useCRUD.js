@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { mockUsers, formModel, userModel } from "@helpers/models";
+import { formModel, userModel } from "@helpers/models";
+import { createNewUser, deleteUser, updateUser, getDataFromEndpoint } from "../services";
 
 export default function useCRUD() {
   const [formValues, setFormValues] = useState(formModel);
@@ -34,32 +35,44 @@ export default function useCRUD() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setFilter("");
     setFilteredList([]);
 
     if (operation === "edit") {
-      setUsers(
-        users.map((user) => {
-          if (user.id === userBridge.id) {
-            const updateUser = { id: userBridge.id, ...formValues };
-            return updateUser;
-          } else {
-            return user;
-          }
-        })
-      );
-      console.log(`User with id: ${userBridge.id} updated`);
-      handleAddUser();
+
+      const userUpdated = await updateUser(userBridge.id, { ...formValues });
+      if (userUpdated) {
+        setUsers((prevUsers) =>
+          prevUsers.map((user) =>
+            user.id === userBridge.id
+              ? { ...user, ...formValues }
+              : user
+          )
+        );
+
+        setFilteredList((prevUsers) =>
+          prevUsers.map((user) =>
+            user.id === userBridge.id
+              ? { ...user, ...formValues }
+              : user
+          )
+        );
+        console.log(`User with id: ${userBridge.id} updated`);
+        handleAddUser();
+      }
+
     } else if (operation === "create") {
       const newUser = {
-        id: users.length + 1,
+        id: crypto.randomUUID(),
         ...formValues,
       };
-      console.log("New user added", newUser);
-      setUsers([newUser, ...users]);
+      const createdUser = await createNewUser(newUser)
+      console.log("New user added", createdUser);
+      setUsers([createdUser, ...users]);
+      setFilteredList([createdUser, ...users])
     }
 
     setFormValues(formModel);
@@ -75,14 +88,17 @@ export default function useCRUD() {
     setShowConfirmationDialog(false);
   }
 
-  const confirmDeleteUser = (userID) => {
-    setUsers(users.filter((user) => user.id !== userID));
-    setFilteredList(filteredList.filter((user) => user.id !== userID));
-    setFilter("");
-    setFormValues(formModel);
-    setUserBridge(userModel);
-    setShowConfirmationDialog(false);
-    console.log(`The user: ${userBridge.name} has been deleted!`);
+  const confirmDeleteUser = async (id) => {
+    const confirmDelete = await deleteUser(id);
+    if (confirmDelete) {
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id))
+      setFilteredList((prevUsers) => prevUsers.filter((user) => user.id !== id))
+      setFilter("");
+      setFormValues(formModel);
+      setUserBridge(userModel);
+      setShowConfirmationDialog(false);
+      console.log(`The user: ${userBridge.name} has been deleted!`);
+    }
   };
 
   const handleFilter = (e) => {
@@ -112,9 +128,14 @@ export default function useCRUD() {
     setUsers(sortedUser);
   };
 
+  const fetchAndSetUsers = async () => {
+    const usersData = await getDataFromEndpoint();
+    setUsers(usersData);
+    setFilteredList(usersData);
+  };
+
   return {
     users,
-    setUsers,
     userBridge,
     operation,
     handleEdit,
@@ -128,8 +149,8 @@ export default function useCRUD() {
     confirmDeleteUser,
     filter,
     filteredList,
-    setFilteredList,
     handleFilter,
-    handleSort
+    handleSort,
+    fetchAndSetUsers,
   }
 }

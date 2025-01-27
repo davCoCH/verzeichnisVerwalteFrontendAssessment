@@ -8,7 +8,8 @@
 - **JavaScript**
 - **Node.js**
 - **React**
-- **json-serve\*** Mock API
+- **json-serve\*** Mock API -> from src file -> npx json-server db.json
+- **Endpoint** http://localhost:3000/users;
 
 Für das Styling wurde die **CSS-Module-Methode** implementiert.
 **Routenalias**, um den Import von Stilen, Komponenten und Hooks zu erleichtern. -> import element from '@something/element'
