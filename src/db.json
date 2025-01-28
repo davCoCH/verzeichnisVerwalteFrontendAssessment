@@ -1,3 +1,64 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "1",
+      "name": "Carlos Mendoza",
+      "email": "carlos.mendoza@example.com",
+      "telephon": "+525511223344"
+    },
+    {
+      "id": "2",
+      "name": "Lucía Fernández",
+      "email": "lucia.fernandez@example.com",
+      "telephon": "+525522334455"
+    },
+    {
+      "id": "3",
+      "name": "Andrés Ramírez",
+      "email": "andres.ramirez@example.com",
+      "telephon": "+525533445566"
+    },
+    {
+      "id": "4",
+      "name": "Sofía García",
+      "email": "sofia.garcia@example.com",
+      "telephon": "+525544556677"
+    },
+    {
+      "id": "5",
+      "name": "Javier López",
+      "email": "javier.lopez@example.com",
+      "telephon": "+525555667788"
+    },
+    {
+      "id": "6",
+      "name": "María Torres",
+      "email": "maria.torres@example.com",
+      "telephon": "+525566778899"
+    },
+    {
+      "id": "7",
+      "name": "Diego Hernández",
+      "email": "diego.hernandez@example.com",
+      "telephon": "+525577889900"
+    },
+    {
+      "id": "8",
+      "name": "Elena Martínez",
+      "email": "elena.martinez@example.com",
+      "telephon": "+525588990011"
+    },
+    {
+      "id": "9",
+      "name": "Miguel Sánchez",
+      "email": "miguel.sanchez@example.com",
+      "telephon": "+525599001122"
+    },
+    {
+      "id": "10",
+      "name": "Paula Rivera",
+      "email": "paula.rivera@example.com",
+      "telephon": "+525510112233"
+    }
+  ]
 }

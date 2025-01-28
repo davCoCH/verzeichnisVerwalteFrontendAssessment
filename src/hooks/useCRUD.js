@@ -126,6 +126,7 @@ export default function useCRUD() {
       sortedUser.sort((a, b) => b.name.localeCompare(a.name));
     }
     setUsers(sortedUser);
+    setFilteredList(sortedUser);
   };
 
   const fetchAndSetUsers = async () => {

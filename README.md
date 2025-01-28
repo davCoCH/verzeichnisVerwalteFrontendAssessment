@@ -8,7 +8,7 @@
 - **JavaScript**
 - **Node.js**
 - **React**
-- **json-serve\*** Mock API -> from src file -> npx json-server db.json
+- **json-serve\*** Mock API -> from src file -> npx json-server db.json // https://github.com/typicode/json-server?tab=readme-ov-file
 - **Endpoint** http://localhost:3000/users;
 
 Für das Styling wurde die **CSS-Module-Methode** implementiert.
